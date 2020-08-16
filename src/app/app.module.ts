@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TeamComponent } from './team/team.component';
 import { TestcasesComponent } from './testcases/testcases.component';
+import { EditorComponent } from './editor/editor.component';
+import { EditorDocsComponent } from './editor-docs/editor-docs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectsComponent,
     TeamComponent,
-    TestcasesComponent
+    TestcasesComponent,
+    EditorComponent,
+    EditorDocsComponent
   ],
   imports: [
     BrowserModule,
