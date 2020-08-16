@@ -24,6 +24,9 @@ jobs:
       
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.3
+      
+    - name: Install
+      run: npm install && npm run build -- --prod
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.5.9
@@ -32,4 +35,3 @@ jobs:
             BASE_BRANCH: master
             BRANCH: gh-pages
             FOLDER: dist/arduina-ui
-            BUILD_SCRIPT: npm install && npm run build -- --prod
