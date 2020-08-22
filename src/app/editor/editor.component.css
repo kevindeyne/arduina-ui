@@ -11,3 +11,20 @@ span.active-line {
   font-family: monospace;
   font-size: 18px;
 }
+input[type="text"] {
+    display: block;
+    width: 100%;
+    outline: 0;
+    color: white;
+    border: 0;
+    background: black;
+    margin-right: 5em;
+    margin-top: 5px;
+    font-family: monospace;
+    font-size: 18px;
+}
+input[type="text"]:focus {
+  color: #c657ff;
+  font-family: monospace;
+  font-size: 18px;
+}
