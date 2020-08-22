@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent {
 
   noFullSelect(event) {
     event.target.selectionStart = event.target.selectionEnd;
