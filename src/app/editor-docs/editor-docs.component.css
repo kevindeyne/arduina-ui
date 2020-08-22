@@ -1,0 +1,13 @@
+h1 {
+  margin-top: 0;
+  padding-top: 0;
+}
+.category {
+  color: gray;
+  font-size: 24px;;
+}
+.code {
+  font-family: monospace;
+  color: #57b1ff;
+  font-size: 17px;
+}

@@ -1,0 +1,13 @@
+div {
+    background: black;
+    padding: 20px;
+    margin-right: 5em;
+    margin-top:5px;
+    font-family: monospace;
+    font-size: 18px;
+}
+span.active-line {
+  color: #c657ff;
+  font-family: monospace;
+  font-size: 18px;
+}
