@@ -12,10 +12,18 @@ export class EditorComponent {
   }
 
   navigation(event) {
-    if(event.key === "ArrowDown") {
-      this.focusElement(event.srcElement.nextElementSibling);
-    } else if(event.key === "ArrowUp") {
-      this.focusElement(event.srcElement.previousElementSibling);
+    if(event.key === "ArrowDown" && null !== event.srcElement.nextElementSibling) {
+      if("INPUT" === event.srcElement.nextElementSibling.nodeName) {
+          this.focusElement(event.srcElement.nextElementSibling);
+      } else {
+          this.focusElement(event.srcElement.nextElementSibling.nextElementSibling);
+      }
+    } else if(event.key === "ArrowUp" && null !== event.srcElement.previousElementSibling) {
+        if("INPUT" === event.srcElement.previousElementSibling.nodeName) {
+            this.focusElement(event.srcElement.previousElementSibling);
+        } else {
+            this.focusElement(event.srcElement.previousElementSibling.previousElementSibling);
+        }
      }
   }
 

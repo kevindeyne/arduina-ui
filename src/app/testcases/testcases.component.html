@@ -1,10 +1,24 @@
-<h2>testcases</h2>
+<div class="container">
+  <h2 class="left"><a href="#" class="breadcrumb">sample project</a> > sample app</h2>
 
-<div style="width:100%">
-  <div style="width:65%; display:inline-block; float:left;">
+  <div class="right align-r">
+    <span class="text-info">{{lastRun}}</span>
+    <a class="button" (click)="startRun()" *ngIf="!isRunning">&gt; Manual run</a>
+    <a class="button cancel" (click)="cancelRun()" *ngIf="isRunning">&gt; Cancel run</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="left">
     <app-editor></app-editor>
   </div>
-  <div style="width:35%; display:inline-block;">
+  <div class="right">
     <app-editor-docs></app-editor-docs>
   </div>
 </div>
+
+<h2>Evolution</h2>
+<p>No run yet.</p>
+
+<h2>History</h2>
+<p>No run yet.</p>

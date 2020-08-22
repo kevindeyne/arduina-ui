@@ -28,3 +28,25 @@ input[type="text"]:focus {
   font-family: monospace;
   font-size: 18px;
 }
+.error {
+    color: #f55f67;
+    border: 1px solid #a61d24;
+    padding: 10px;
+    margin-bottom: 10px !important;
+}
+.warning {
+    color: orange;
+    border: 1px solid orange;
+    padding: 10px;
+    margin-bottom: 10px !important;
+}
+.error p, .warning p {
+    font-family: monospace;
+    font-size: 17px;
+    padding: 5px;
+    margin: 0;
+}
+.error a {
+    color: #ff9ca1;
+    text-decoration: underline;
+}

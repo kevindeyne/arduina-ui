@@ -1,7 +1,14 @@
 <div>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keydown)="navigation($event)" value="OPEN 'https://demo.flatlogic.com/sing-app-react/'"/>
+  <div class="warning">
+    <p>Warning: actual url after redirect was 'https://demo.flatlogic.com/sing-app-react/login'</p>
+  </div>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keydown)="navigation($event)" value="INPUT 'input[name=&quot;email&quot;]' -set='admin@flatlogic.com'"/>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keydown)="navigation($event)" value="INPUT 'input[name=&quot;password&quot;]' -set=password"/>
+  <div class="error">
+    <p>Error: Could not find 'input[name=&quot;password&quot;]'</p>
+    <p><a href="#">View the DOM</a> | <a href="#">View a screenshot</a></p>
+  </div>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keydown)="navigation($event)" value="CLICK 'button[type=&quot;submit&quot;]'"/>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keydown)="navigation($event)" value="VERIFY CONTAINS 'Analytics'"/>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keydown)="navigation($event)" value="VERIFY URL 'https://demo.flatlogic.com/sing-app-react/#/app/main/analytics'"/>
