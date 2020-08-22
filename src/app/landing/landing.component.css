@@ -7,7 +7,7 @@
   text-shadow: 0 -1px 0 rgba(0,0,0,.12);
   box-shadow: 0 2px 0 rgba(0,0,0,.045);
   height: 40px;
-  padding: 6.4px 15px;
+  padding: 6.4px 55px;
   font-size: 26px;
   border-radius: 2px;
   outline:0;
@@ -32,6 +32,11 @@ padding-bottom:30px;
 
 h2 {
   padding-top: 65px;
+}
+
+h4 {
+  color: #399fff;
+  font-size: 19px;
 }
 
 p {
