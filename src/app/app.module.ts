@@ -10,6 +10,7 @@ import { TeamComponent } from './team/team.component';
 import { TestcasesComponent } from './testcases/testcases.component';
 import { EditorComponent } from './editor/editor.component';
 import { EditorDocsComponent } from './editor-docs/editor-docs.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EditorDocsComponent } from './editor-docs/editor-docs.component';
     TeamComponent,
     TestcasesComponent,
     EditorComponent,
-    EditorDocsComponent
+    EditorDocsComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

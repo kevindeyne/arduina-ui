@@ -1,15 +1,17 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{ title }}
-  </h1>
+<div>
+  <!-- notActive is a reference to else -->
+  <div *ngIf="!isLanding; else landing">
+    <div style="text-align:center">
+      <ul>
+        <li><a routerLink="/team" routerLinkActive="active">Team</a></li>
+        <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
+        <li><a routerLink="/testcases" routerLinkActive="active">Testcases</a></li>
+      </ul>
+    </div>
 
-<ul>
-  <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Team</a></li>
-  <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
-  <li><a routerLink="/testcases" routerLinkActive="active">Testcases</a></li>
-</ul>
-
+    <router-outlet></router-outlet>
+  </div>
+  <ng-template #landing>
+    <router-outlet></router-outlet>
+  </ng-template>
 </div>
-
-<router-outlet></router-outlet>

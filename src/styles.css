@@ -1,2 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-a.active {color:red;}
+a {
+  color: #dcdcdc;
+  text-decoration: none;
+}
+a.active {
+  color: #177ddc;
+}
+a:hover {
+  color: white;
+}
+html, body {
+  background: #141414;
+  color: #dcdcdc;
+}
+* {
+font-family: 'Nunito Sans', sans-serif;
+}

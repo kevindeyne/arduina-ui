@@ -1,0 +1,42 @@
+.call-to-action {
+  margin-right: 8px;
+  margin-bottom: 12px;
+  color: #fff;
+  background-color: #177ddc;
+  border-color: #177ddc;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 0 rgba(0,0,0,.045);
+  height: 40px;
+  padding: 6.4px 15px;
+  font-size: 26px;
+  border-radius: 2px;
+  outline:0;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.645,.045,.355,1);
+  user-select: none;
+}
+
+h1 {
+font-size: 65px;
+margin-bottom: 0;
+}
+
+h1.sub {
+font-size:26px;
+color:gray;
+width:50%;
+margin-left:auto;
+margin-right:auto;
+padding-bottom:30px;
+}
+
+h2 {
+  padding-top: 65px;
+}
+
+p {
+width:44%;
+margin-left:auto;
+margin-right:auto;
+text-align:justify;
+}
