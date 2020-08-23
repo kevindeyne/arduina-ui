@@ -24,7 +24,7 @@ input[type="text"] {
     font-size: 18px;
 }
 input[type="text"]:focus {
-  color: #c657ff;
+  color: #55a8f7;
   font-family: monospace;
   font-size: 18px;
 }

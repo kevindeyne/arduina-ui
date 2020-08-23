@@ -1,3 +1,4 @@
+import { DocumentationService } from './services/documentation.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,6 +13,9 @@ import { EditorComponent } from './editor/editor.component';
 import { EditorDocsComponent } from './editor-docs/editor-docs.component';
 import { LandingComponent } from './landing/landing.component';
 
+import { TableComponent } from './sub-components/table/table.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,13 +24,14 @@ import { LandingComponent } from './landing/landing.component';
     TestcasesComponent,
     EditorComponent,
     EditorDocsComponent,
-    LandingComponent
+    LandingComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DocumentationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
