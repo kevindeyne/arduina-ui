@@ -2,6 +2,11 @@
     border: 1px solid #404040;
     border-radius: 3px;
     padding: 20px;
+    margin-bottom: 10px;
+}
+#new-row{
+    border-color: #545454;
+    background-color: #1d1d1d;
 }
 a {
 font-size:20px;

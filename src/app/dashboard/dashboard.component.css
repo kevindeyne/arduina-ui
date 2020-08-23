@@ -1,0 +1,11 @@
+span.numbers {
+    font-size: 35px;
+    display: block;
+}
+span.title {
+  color: gray;
+}
+.trend {
+    display: inline-block;
+    margin-right: 30px;
+}
