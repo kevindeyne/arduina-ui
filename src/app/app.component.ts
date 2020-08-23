@@ -18,7 +18,7 @@ export class AppComponent {
       this.router.events
           .subscribe( ( event ) => {
               if ( event instanceof NavigationEnd ) {
-                  this.isLanding = event.url === '/'
+                  this.isLanding = (event.url === '/') || (event.url === '/login') || (event.url === '/registration');
               }
           });
   }

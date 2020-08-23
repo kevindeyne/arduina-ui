@@ -14,6 +14,11 @@ import { EditorDocsComponent } from './editor-docs/editor-docs.component';
 import { LandingComponent } from './landing/landing.component';
 
 import { TableComponent } from './sub-components/table/table.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewProjectComponent } from './new-project/new-project.component';
+import { ConnectorsComponent } from './connectors/connectors.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -25,7 +30,12 @@ import { TableComponent } from './sub-components/table/table.component';
     EditorComponent,
     EditorDocsComponent,
     LandingComponent,
-    TableComponent
+    TableComponent,
+    DashboardComponent,
+    NewProjectComponent,
+    ConnectorsComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
