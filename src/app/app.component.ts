@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  public isLanding: Boolean;
+  public isLanding = true;
 
-  constructor(private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
       this.router.events
@@ -21,6 +20,10 @@ export class AppComponent {
                   this.isLanding = (event.url === '/') || (event.url === '/login') || (event.url === '/registration');
               }
           });
+  }
+
+  logout() {
+      this.userService.logout();
   }
 
 }

@@ -1,3 +1,4 @@
+import { LoginGuard as LoginGuard } from './login.guard';
 import { ConnectorsComponent } from './connectors/connectors.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { LoginComponent } from './login/login.component';
@@ -11,16 +12,16 @@ import { TeamComponent } from './team/team.component';
 import { TestcasesComponent } from './testcases/testcases.component';
 import { LandingComponent } from './landing/landing.component';
 
-const routes : Routes = [
+const routes: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'team', component: TeamComponent },
-  { path: 'projects', component: ProjectsComponent },
-  { path: 'projects/:id', component: NewProjectComponent },
-  { path: 'testcases', component: TestcasesComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]  },
+  { path: 'team', component: TeamComponent, canActivate: [LoginGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [LoginGuard] },
+  { path: 'projects/:id', component: NewProjectComponent, canActivate: [LoginGuard] },
+  { path: 'testcases', component: TestcasesComponent, canActivate: [LoginGuard] },
+  { path: 'connectors', component: ConnectorsComponent, canActivate: [LoginGuard] },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'connectors', component: ConnectorsComponent }
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
