@@ -27,26 +27,21 @@ export class LoginComponent implements OnInit {
     const auth = { username: this.username, password: this.password };
     this.httpClient
       .post<any>('http://localhost:80/authenticate', auth)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError((e: any) => this.handleError(e, this)))
       .subscribe(userData => { this.userService.login(userData.token); });
   }
 
-  private handleError(error: HttpErrorResponse) {
-    this.spinner.hide();
+  private handleError(error: HttpErrorResponse, context: LoginComponent) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
-      this.error = error.error.message;
+      context.error = error.error.message;
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-      this.error = error.error;
+      context.error = 'Authorization server returned an error. Please try again later.';
     }
-    // Return an observable with a user-facing error message.
-    this.error = 'Please try again later.';
+    context.spinner.hide();
     return throwError(
       'Something bad happened; please try again later.');
   }

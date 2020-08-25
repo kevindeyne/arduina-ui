@@ -48,3 +48,6 @@ label {
     border-bottom-right-radius: 0;
     border-right: none;
 }
+.error {
+    color: #ff7878;
+}

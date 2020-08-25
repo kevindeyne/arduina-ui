@@ -1,7 +1,7 @@
 <div id="login">
     <h1>Arduina</h1>
     <h2>Next generation test automation</h2>
-    <p *ngIf="error != null">Error: {{error}}</p>
+    <p *ngIf="error != null" class="error">Error: {{error}}</p>
 
     <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#acc5ff" type = "fire" [fullScreen] = "true"><p style="color: white">Authenticating, please wait ...</p></ngx-spinner>
     <form>
