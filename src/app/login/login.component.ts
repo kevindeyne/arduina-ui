@@ -12,9 +12,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent implements OnInit {
 
-  private username = 'kevindeyne@gmail.com';
-  private password = 'passw0rd';
-  private error = null;
+  username = 'kevindeyne@gmail.com';
+  password = 'passw0rd';
+  error = null;
 
   constructor(private userService: UserService, private httpClient: HttpClient, private spinner: NgxSpinnerService) {}
 
