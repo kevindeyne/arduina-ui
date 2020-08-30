@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectsComponent implements OnInit {
 
   private projectId = 0;
-  private projects = [];
+  projects = [];
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService) { }
 
@@ -18,7 +18,9 @@ export class ProjectsComponent implements OnInit {
     this.projectId = this.route.snapshot.params.id;
     //TODO instead of loading this here, get this from a service and already load it upon entry / only do update here
     this.httpClient.get<any>('http://localhost:80/projects', this.userService.getHeader()).subscribe(e => {
-      this.projects = e;
+      if (Array.isArray(e)) {
+        this.projects = e;
+      }
     });
   }
 
