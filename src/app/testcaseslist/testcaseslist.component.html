@@ -1,0 +1,6 @@
+<h1>Projects / Project name</h1>
+<a routerLink="/projects">Back to projects</a>
+<div *ngFor="let testcase of testcases">
+    <a routerLink="/testcases/{{testcase.id}}">{{testcase.name}}</a> <br>
+    <span>{{testcase.status}}</span>
+</div>

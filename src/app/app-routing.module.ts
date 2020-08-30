@@ -1,3 +1,4 @@
+import { TestcaseslistComponent } from './testcaseslist/testcaseslist.component';
 import { LoginGuard as LoginGuard } from './login.guard';
 import { ConnectorsComponent } from './connectors/connectors.component';
 import { NewProjectComponent } from './new-project/new-project.component';
@@ -17,8 +18,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]  },
   { path: 'team', component: TeamComponent, canActivate: [LoginGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [LoginGuard] },
-  { path: 'projects/:id', component: NewProjectComponent, canActivate: [LoginGuard] },
-  { path: 'testcases', component: TestcasesComponent, canActivate: [LoginGuard] },
+  { path: 'projects/:id', component: TestcaseslistComponent, canActivate: [LoginGuard] },
+  { path: 'new-app', component: NewProjectComponent, canActivate: [LoginGuard] },
+  { path: 'testcases/:id', component: TestcasesComponent, canActivate: [LoginGuard] },
   { path: 'connectors', component: ConnectorsComponent, canActivate: [LoginGuard] },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent }

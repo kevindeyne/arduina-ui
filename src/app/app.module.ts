@@ -23,6 +23,7 @@ import { RegistrationComponent } from './registration/registration.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TestcaseslistComponent } from './testcaseslist/testcaseslist.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NewProjectComponent,
     ConnectorsComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    TestcaseslistComponent
   ],
   imports: [
     BrowserModule,

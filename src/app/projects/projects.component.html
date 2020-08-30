@@ -1,5 +1,7 @@
 <h1>Projects</h1>
 <app-table></app-table>
+<a routerLink="/new-app">Add new app</a>
 <div *ngFor="let project of projects">
-    {{project.id}}, {{project.name}}, {{project.status}}
+    <a routerLink="/projects/{{project.id}}">{{project.name}}</a> <br>
+    <span>{{project.status}}</span>
 </div>
