@@ -2,6 +2,7 @@ import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -15,7 +16,7 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     //TODO instead of loading this here, get this from a service and already load it upon entry / only do update here
-    this.httpClient.get<any>('http://localhost:80/projects', this.userService.getHeader()).subscribe(e => {
+    this.httpClient.get<any>(environment.baseUrl + '/projects', this.userService.getHeader()).subscribe(e => {
       if (Array.isArray(e)) {
         this.projects = e;
       }

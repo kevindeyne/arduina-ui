@@ -2,11 +2,12 @@
   width:100%;
   clear:both;
   display: flex;
+  padding-top: 10px;
 }
 .left {
   width:65%;
-  display:inline-block;
   float:left;
+  margin-top: 0;
 }
 .right {
   width:35%;
@@ -14,9 +15,18 @@
 }
 .text-info {
   position: relative;
-  top: 18px;
-  right: 20px;
+  /*top: 18px;
+  right: 20px;*/
 }
 .align-r {
-  text-align: right;
+  text-align: left;
+  float: right;
+  margin-top: -43px;
+}
+a.button {
+  top: 0;
+  margin-left: 10px;
+}
+h1 {
+  margin-bottom: 0;
 }

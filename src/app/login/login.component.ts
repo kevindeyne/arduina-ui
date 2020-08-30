@@ -4,6 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 import { throwError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +21,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.hide();
+    if (!environment.production) {
+      this.login();
+    }
   }
 
   login() {
     this.spinner.show();
     const auth = { username: this.username, password: this.password };
     this.httpClient
-      .post<any>('http://localhost:80/authenticate', auth)
+      .post<any>(environment.baseUrl + '/authenticate', auth)
       .pipe(catchError((e: any) => this.handleError(e, this)))
       .subscribe(userData => { this.userService.login(userData.token); });
   }

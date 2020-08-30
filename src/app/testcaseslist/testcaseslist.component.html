@@ -1,6 +1,13 @@
-<h1>Projects / Project name</h1>
-<a routerLink="/projects">Back to projects</a>
-<div *ngFor="let testcase of testcases">
-    <a routerLink="/testcases/{{testcase.id}}">{{testcase.name}}</a> <br>
-    <span>{{testcase.status}}</span>
-</div>
+<h1><a routerLink="/projects" class="breadcrumb">Projects</a> / Project name</h1>
+
+<section class="table">
+    <div id="new-row" class="row">
+        <a routerLink="/new-testcase">+ New testcase</a>
+        <p>Create a new testcase for this app</p>
+    </div>
+    
+    <div class="row" *ngFor="let testcase of testcases">
+        <a routerLink="/testcases/{{testcase.id}}">{{testcase.name}}</a> <br>
+        <p>Last run: #2 23/04 08:25 - {{testcase.status}}</p>
+    </div>
+</section>

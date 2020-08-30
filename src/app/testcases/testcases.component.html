@@ -1,11 +1,9 @@
-<div class="container">
-  <h2 class="left"><a href="#" class="breadcrumb">sample project</a> > sample app</h2>
+<h1><a routerLink="/projects" class="breadcrumb">Projects</a> / <a routerLink="/projects/1" class="breadcrumb">Project name</a> / Testcase name</h1>
 
-  <div class="right align-r">
-    <span class="text-info">{{lastRun}}</span>
-    <a class="button" (click)="startRun()" *ngIf="!isRunning">&gt; Manual run</a>
-    <a class="button cancel" (click)="cancelRun()" *ngIf="isRunning">&gt; Cancel run</a>
-  </div>
+<div class="align-r">
+  <span class="text-info">{{lastRun}}</span>
+  <a class="button" (click)="startRun()" *ngIf="!isRunning">&gt; Manual run</a>
+  <a class="button cancel" (click)="cancelRun()" *ngIf="isRunning">&gt; Cancel run</a>
 </div>
 
 <div class="container">

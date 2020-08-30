@@ -15,6 +15,9 @@ html, body {
   background: #141414;
   color: #dcdcdc;
 }
+body { 
+  overflow-y:scroll;
+}
 * {
 font-family: 'Nunito Sans', sans-serif;
 }
@@ -53,4 +56,25 @@ a.cancel {
 }
 .breadcrumb {
   color: gray;
+  padding: 0;
+}
+
+/*** TABLE ***/
+section.table .row {
+  border: 1px solid #404040;
+  border-radius: 3px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+section.table #new-row{
+  border-color: #545454;
+  background-color: #1d1d1d;
+}
+section.table a {
+font-size:20px;
+}
+section.table p {
+  margin: 0;
+  padding-left: 5px;
+  color: #b1b1b1;
 }

@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class UserService {
 
   private token: string = null;
+  private expiration: number;
   redirectUrl: string = null;
 
   constructor(private router: Router) { }
@@ -24,9 +25,13 @@ export class UserService {
     return this.token != null;
   }
 
+  isTimeForRefresh() {
+    return new Date().getTime() > this.expiration;
+  }
+
   login(newToken: string) {
-    if (newToken !== null && newToken !== undefined) {
-      this.token = 'Bearer ' + newToken;
+    if (this.nullcheckToken(newToken)) {
+      this.setToken(newToken);
       if (this.redirectUrl) {
         this.router.navigate([this.redirectUrl]);
         this.redirectUrl = null;
@@ -34,6 +39,23 @@ export class UserService {
         this.router.navigate(['/dashboard']);
       }
     }
+  }
+
+  refreshToken(newToken: string) {
+    if (this.nullcheckToken(newToken)) { this.setToken(newToken); }
+  }
+
+  private nullcheckToken(newToken: string) : boolean {
+    return newToken !== null && newToken !== undefined;
+  }
+
+  private setToken(newToken: string) {
+    this.token = 'Bearer ' + newToken;
+    this.expiration = this.calculateExpiration();
+  }
+
+  private calculateExpiration() : number {
+    return new Date().getTime() + 15 * 60 * 1000;
   }
 
   logout() {
