@@ -1,4 +1,4 @@
-<div>
+<!--div>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="OPEN 'https://demo.flatlogic.com/sing-app-react/'"/>
   <div class="warning">
     <p>Warning: actual url after redirect was 'https://demo.flatlogic.com/sing-app-react/login'</p>
@@ -12,5 +12,11 @@
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="CLICK 'button[type=&quot;submit&quot;]'"/>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="VERIFY CONTAINS 'Analytics'"/>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="VERIFY URL 'https://demo.flatlogic.com/sing-app-react/#/app/main/analytics'"/>
+  <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  placeholder="# enter new command"/>
+</div-->
+
+
+<div>
+ <input *ngFor="let node of nodes" type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="{{node.command}}"/>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  placeholder="# enter new command"/>
 </div>

@@ -1,4 +1,8 @@
+import { UserService } from './../services/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-testcases',
@@ -8,40 +12,50 @@ import { Component, OnInit } from '@angular/core';
 export class TestcasesComponent implements OnInit {
 
   lastRunCounter = 0;
-  lastRunStatus = "Not run"
-  lastRun: String = this.reconstructLastRun();
-  isRunning: Boolean = false;
+  lastRunStatus = 'Not run';
+  lastRun: string = this.reconstructLastRun();
+  isRunning = false;
 
-  constructor() { }
+  nodes = [];
+
+  private testcaseId: string;
+
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.testcaseId = this.route.snapshot.params.id;
+    this.httpClient.get<any>(environment.baseUrl + '/node/' + this.testcaseId, this.userService.getHeader()).subscribe(e => {
+      if (Array.isArray(e)) {
+        this.nodes = e;
+      }
+    });
   }
 
-  reconstructLastRun() : String {
+  reconstructLastRun(): string {
     if(this.lastRunCounter === 0) {
       this.lastRun = this.lastRunStatus;
     } else {
-       this.lastRun = "#" + this.lastRunCounter + " - 23/08 13:34 - " + this.lastRunStatus;
+       this.lastRun = '#' + this.lastRunCounter + ' - 23/08 13:34 - ' + this.lastRunStatus;
     }
     return this.lastRun;
   }
 
   startRun() {
     this.isRunning = true;
-    this.lastRunStatus = "In progress";
+    this.lastRunStatus = 'In progress';
     this.lastRunCounter++;
     this.reconstructLastRun();
 
     setTimeout(()=>{
           this.isRunning = false;
-          this.lastRunStatus = "Success";
+          this.lastRunStatus = 'Success';
           this.reconstructLastRun();
      }, 2000);
   }
 
   cancelRun() {
     this.isRunning = false;
-    this.lastRunStatus = "Cancelled";
+    this.lastRunStatus = 'Cancelled';
     this.reconstructLastRun();
   }
 

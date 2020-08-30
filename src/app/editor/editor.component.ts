@@ -1,5 +1,5 @@
 import { DocumentationService } from './../services/documentation.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-editor',
@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorComponent {
 
-  constructor(private documentationService : DocumentationService) {}
+  @Input()
+  nodes: [];
+
+  constructor(private documentationService: DocumentationService) {}
 
   noFullSelect(event) {
     event.target.selectionStart = event.target.selectionEnd;
@@ -17,14 +20,14 @@ export class EditorComponent {
 
   navigation(event) {
     this.updateDocumentation(event);
-    if(event.key === "ArrowDown" && null !== event.srcElement.nextElementSibling) {
-      if("INPUT" === event.srcElement.nextElementSibling.nodeName) {
+    if (event.key === 'ArrowDown' && null !== event.srcElement.nextElementSibling) {
+      if ('INPUT' === event.srcElement.nextElementSibling.nodeName) {
           this.focusElement(event, event.srcElement.nextElementSibling);
       } else {
           this.focusElement(event, event.srcElement.nextElementSibling.nextElementSibling);
       }
-    } else if(event.key === "ArrowUp" && null !== event.srcElement.previousElementSibling) {
-        if("INPUT" === event.srcElement.previousElementSibling.nodeName) {
+    } else if (event.key === 'ArrowUp' && null !== event.srcElement.previousElementSibling) {
+        if ('INPUT' === event.srcElement.previousElementSibling.nodeName) {
             this.focusElement(event, event.srcElement.previousElementSibling);
         } else {
             this.focusElement(event, event.srcElement.previousElementSibling.previousElementSibling);
@@ -33,7 +36,7 @@ export class EditorComponent {
   }
 
   focusElement(event, element) {
-    if(element == null){
+    if (element == null) {
       return;
     } else {
       element.focus();
