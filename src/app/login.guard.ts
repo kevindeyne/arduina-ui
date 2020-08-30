@@ -11,6 +11,8 @@ export class LoginGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!this.userService.isLoggedIn()) {
+      if(state.url !== '/dashboard') { this.userService.redirectUrl = state.url; }
+
       return this.router.parseUrl('/login');
     } else {
       return true;

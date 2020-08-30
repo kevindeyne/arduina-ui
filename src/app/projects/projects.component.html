@@ -1,2 +1,5 @@
 <h1>Projects</h1>
 <app-table></app-table>
+<div *ngFor="let project of projects">
+    {{project.id}}, {{project.name}}, {{project.status}}
+</div>

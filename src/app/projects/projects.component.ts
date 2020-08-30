@@ -1,5 +1,7 @@
+import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -7,14 +9,17 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class ProjectsComponent implements OnInit {
 
-  projectId = 0;
+  private projectId = 0;
+  private projects = [];
 
-  constructor(private route: ActivatedRoute) {
-
-  }
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.projectId = this.route.snapshot.params['id'];
+    this.projectId = this.route.snapshot.params.id;
+    //TODO instead of loading this here, get this from a service and already load it upon entry / only do update here
+    this.httpClient.get<any>('http://localhost:80/projects', this.userService.getHeader()).subscribe(e => {
+      this.projects = e;
+    });
   }
 
 }

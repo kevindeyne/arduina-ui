@@ -1,1 +1,18 @@
-<p>registration works!</p>
+<div id="registration">
+  <h1>Welcome to Arduina</h1>
+  <h2>Next generation test automation</h2>
+  <p *ngIf="error != null" class="error">Error: {{error}}</p>
+
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#acc5ff" type = "fire" [fullScreen] = "true"><p style="color: white">Authenticating, please wait ...</p></ngx-spinner>
+  <form>
+    <p>
+      <label>Email</label>
+      <input type="text" name="username" autocomplete="email" [value]="username" />
+    </p>
+    <p>
+      <label>Password</label>
+      <input type="password" name="password" autocomplete="current-password" [value]="password" />
+    </p>
+  </form>
+  <a class="button" (click)="register()">> register</a>
+</div>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+import { constructor } from 'jasmine';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,17 @@ import { Router } from '@angular/router';
 export class UserService {
 
   private token: string = null;
+  redirectUrl: string = null;
 
   constructor(private router: Router) { }
+
+  getHeader() {
+   const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: this.token
+   });
+   return { headers: reqHeader };
+  }
 
   isLoggedIn() {
     return this.token != null;
@@ -17,7 +28,12 @@ export class UserService {
   login(newToken: string) {
     if (newToken !== null && newToken !== undefined) {
       this.token = 'Bearer ' + newToken;
-      this.router.navigate(['/dashboard']);
+      if (this.redirectUrl) {
+        this.router.navigate([this.redirectUrl]);
+        this.redirectUrl = null;
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
     }
   }
 
