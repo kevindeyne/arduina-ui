@@ -46,11 +46,14 @@ export class TestcasesComponent implements OnInit {
     this.lastRunCounter++;
     this.reconstructLastRun();
 
-    setTimeout(()=>{
-          this.isRunning = false;
-          this.lastRunStatus = 'Success';
-          this.reconstructLastRun();
-     }, 2000);
+    this.httpClient.post<any>(environment.baseUrl + '/node/' + this.testcaseId + '/run', {}, this.userService.getHeader())
+      .subscribe(e => {});
+  }
+
+  completeRun() { //has to be called from websocket?
+    this.isRunning = false;
+    this.lastRunStatus = 'Success';
+    this.reconstructLastRun();
   }
 
   cancelRun() {

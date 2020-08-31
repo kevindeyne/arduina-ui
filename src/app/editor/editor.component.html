@@ -16,7 +16,11 @@
 </div-->
 
 
-<div>
- <input *ngFor="let node of nodes" type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="{{node.command}}"/>
+<div class="outer">
+  <div class="inner" *ngFor="let node of nodes">
+    <input  type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="{{node.command}}"/>
+    <span class="info status">X</span>
+    <span class="info time">152s</span>
+  </div>
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  placeholder="# enter new command"/>
 </div>
