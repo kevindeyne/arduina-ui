@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class UserService {
 
   private token: string = null;
+  public teamToken: string = null;
   private expiration: number;
   redirectUrl: string = null;
 
@@ -29,9 +30,10 @@ export class UserService {
     return new Date().getTime() > this.expiration;
   }
 
-  login(newToken: string) {
-    if (this.nullcheckToken(newToken)) {
+  login(newToken: string, teamToken: string) {
+    if (this.nullcheckToken(newToken) && this.nullcheckToken(teamToken)) {
       this.setToken(newToken);
+      this.setTeamToken(teamToken);
       if (this.redirectUrl) {
         this.router.navigate([this.redirectUrl]);
         this.redirectUrl = null;
@@ -52,6 +54,10 @@ export class UserService {
   private setToken(newToken: string) {
     this.token = 'Bearer ' + newToken;
     this.expiration = this.calculateExpiration();
+  }
+
+  private setTeamToken(teamToken: string) {
+    this.teamToken = teamToken;
   }
 
   private calculateExpiration() : number {

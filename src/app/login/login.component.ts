@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.httpClient
       .post<any>(environment.baseUrl + '/authenticate', auth)
       .pipe(catchError((e: any) => this.handleError(e, this)))
-      .subscribe(userData => { this.userService.login(userData.token); });
+      .subscribe(userData => { this.userService.login(userData.token, userData.teamToken); });
   }
 
   private handleError(error: HttpErrorResponse, context: LoginComponent) {
