@@ -1,7 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
+import { EventService } from './event.service';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import { WebsocketService } from './websocket.service';
 import { WebSocketAPI } from './WebSocketApi';
 
 @Injectable({
@@ -12,9 +12,18 @@ export class UserService {
   private token: string = null;
   public teamToken: string = null;
   private expiration: number;
+  private socket = null;
+  private eventService: EventService;
   redirectUrl: string = null;
 
-  constructor(private router: Router, private injector: Injector) { }
+  constructor(private router: Router, eventService: EventService) {
+    this.socket = new WebSocketAPI(eventService);
+    this.eventService = eventService;
+  }
+
+  getEvents(): EventService {
+    return this.eventService;
+  }
 
   getHeader() {
    const reqHeader = new HttpHeaders({
@@ -36,8 +45,7 @@ export class UserService {
     if (this.nullcheckToken(newToken) && this.nullcheckToken(teamToken)) {
       this.setToken(newToken);
       this.setTeamToken(teamToken);
-      //this.injector.get(WebsocketService).init();
-      new WebSocketAPI()._connect(teamToken);
+      this.socket._connect(teamToken, this.eventService);
       if (this.redirectUrl) {
         this.router.navigate([this.redirectUrl]);
         this.redirectUrl = null;
@@ -69,6 +77,7 @@ export class UserService {
   }
 
   logout() {
+    this.socket._disconnect();
     this.token = null;
   }
 }

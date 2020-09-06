@@ -1,27 +1,36 @@
 import { environment } from 'src/environments/environment';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { EventService } from './event.service';
+import { StatusChangeModel } from './StatusChangeModel';
 
 export class WebSocketAPI {
-    webSocketEndPoint = environment.websocketUrl;
-    topic = '/topic/greetings';
-    token = null;
-    stompClient: any;
+    private webSocketEndPoint = environment.websocketUrl;
 
-    constructor() {
+    private topicNewToken = '/topic/newToken/';
+    private topicTestcaseStatusChange = '/topic/testcase-status-change/';
+    private topicNodeStatusChange = '/topic/node-status-change/';
 
+    private token = null;
+    private stompClient: any;
+
+    private eventService: EventService;
+
+    constructor(eventService: EventService) {
+        this.eventService = eventService;
     }
-    _connect(incomingToken) {
-        console.log('Initialize WebSocket Connection');
+
+    _connect(teamToken) {
         const ws = new SockJS(this.webSocketEndPoint);
         this.stompClient = Stomp.over(ws);
         const self = this;
-        self.token = incomingToken;
+        self.token = teamToken;
         self.stompClient.connect({}, () => {
-            console.log('connecting to ' + self.topic + '/' + self.token);
-            self.stompClient.subscribe(self.topic + '/' + self.token, (sdkEvent) => {
-                self.onMessageReceived(sdkEvent);
+            self.stompClient.subscribe(self.topicNewToken + self.token, (e) => { self.onMessageReceived(e.body); });
+            self.stompClient.subscribe(self.topicNodeStatusChange + self.token, (e) => {
+                self.eventService.sendNodeStatusChange(new StatusChangeModel().copyTo(e.body));
             });
+            self.stompClient.subscribe(self.topicTestcaseStatusChange + self.token, (e) => { self.onMessageReceived(e.body); });
         }, this.errorCallBack);
     }
 
@@ -29,7 +38,6 @@ export class WebSocketAPI {
         if (this.stompClient !== null) {
             this.stompClient.disconnect();
         }
-        console.log('Disconnected');
     }
 
     // on error, schedule a reconnection attempt
@@ -42,11 +50,10 @@ export class WebSocketAPI {
     }
 
     onMessageReceived(message) {
-        console.log('Message Recieved from Server :: ' + message);
-        this.handleMessage(JSON.stringify(message.body));
+        this.handleMessage(message.body);
     }
 
-    handleMessage(message: string) {
+    handleMessage(message: object) {
         console.log(message);
     }
 }

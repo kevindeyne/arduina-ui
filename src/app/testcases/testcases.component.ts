@@ -1,3 +1,5 @@
+import { TestNode } from './../services/TestNode';
+import { StatusChangeModel } from './../services/StatusChangeModel';
 import { UserService } from './../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +18,7 @@ export class TestcasesComponent implements OnInit {
   lastRun: string = this.reconstructLastRun();
   isRunning = false;
 
-  nodes = [];
+  nodes: TestNode[] = [];
 
   private testcaseId: string;
 
@@ -29,10 +31,23 @@ export class TestcasesComponent implements OnInit {
         this.nodes = e;
       }
     });
+
+    this.userService.getEvents().getNodeStatusChanges().subscribe(statusChange => {
+      for (const node of this.nodes) {
+        if (node.id === statusChange.id) {
+          node.lastState = statusChange.statusPrettyPrint;
+          break;
+        }
+      }
+    });
+  }
+
+  receiveStatusChange(e: any) {
+    console.log(e);
   }
 
   reconstructLastRun(): string {
-    if(this.lastRunCounter === 0) {
+    if (this.lastRunCounter === 0) {
       this.lastRun = this.lastRunStatus;
     } else {
        this.lastRun = '#' + this.lastRunCounter + ' - 23/08 13:34 - ' + this.lastRunStatus;
@@ -46,11 +61,15 @@ export class TestcasesComponent implements OnInit {
     this.lastRunCounter++;
     this.reconstructLastRun();
 
+    for (const node of this.nodes) {
+      node.lastState = '';
+    }
+
     this.httpClient.post<any>(environment.baseUrl + '/node/' + this.testcaseId + '/run', {}, this.userService.getHeader())
       .subscribe(e => {});
   }
 
-  completeRun() { //has to be called from websocket?
+  completeRun() { // has to be called from websocket?
     this.isRunning = false;
     this.lastRunStatus = 'Success';
     this.reconstructLastRun();
