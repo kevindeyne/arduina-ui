@@ -27,7 +27,7 @@ export class WebsocketService {
 
       if (!this.newTokenChange) {
         this.newTokenChange = true;
-        webSocket(environment.websocketUrl + '/topic/newToken/' + this.userService.teamToken).subscribe(
+        webSocket(environment.websocketUrl + '/newToken/' + this.userService.teamToken).subscribe(
           newToken => this.userService.refreshToken(newToken.toString()),
           err => console.log(err),
           () => { this.newTokenChange = false; this.init(); }

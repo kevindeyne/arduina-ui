@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { WebsocketService } from './websocket.service';
+import { WebSocketAPI } from './WebSocketApi';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
   private expiration: number;
   redirectUrl: string = null;
 
-  constructor(private router: Router, private websocketService: WebsocketService) { }
+  constructor(private router: Router, private injector: Injector) { }
 
   getHeader() {
    const reqHeader = new HttpHeaders({
@@ -35,7 +36,8 @@ export class UserService {
     if (this.nullcheckToken(newToken) && this.nullcheckToken(teamToken)) {
       this.setToken(newToken);
       this.setTeamToken(teamToken);
-      this.websocketService.init();
+      //this.injector.get(WebsocketService).init();
+      new WebSocketAPI()._connect(teamToken);
       if (this.redirectUrl) {
         this.router.navigate([this.redirectUrl]);
         this.redirectUrl = null;
