@@ -8,25 +8,32 @@ import { webSocket } from 'rxjs/webSocket';
 })
 export class WebsocketService {
 
-  private topicNodeChange = null;
+  private nodeStatusChange = false;
+  private newTokenChange = false;
 
-  constructor(private userService: UserService) {
-  }
+  constructor(private userService: UserService) { }
 
   init() {
-    if(this.userService.isLoggedIn()) {
-      console.log('Team token:' + this.userService.teamToken);
-      this.topicNodeChange = webSocket(environment.websocketUrl + '/topic/node/status-change');
+    if (this.userService.isLoggedIn()) {
 
-      console.log('Websocket constructor');
-      this.topicNodeChange.subscribe(
-          msg => console.log('message received: ' + msg),
-          // Called whenever there is a message from the server
+      if (!this.nodeStatusChange) {
+        this.nodeStatusChange = true;
+        webSocket(environment.websocketUrl + '/topic/node/status-change/' + this.userService.teamToken).subscribe(
+          msg => console.log('node change received: ' + msg),
           err => console.log(err),
-          // Called if WebSocket API signals some kind of error
-          () => console.log('complete')
-          // Called when connection is closed (for whatever reason)
-       );
+          () => { this.nodeStatusChange = false; this.init(); }
+        );
+      }
+
+      if (!this.newTokenChange) {
+        this.newTokenChange = true;
+        webSocket(environment.websocketUrl + '/topic/newToken/' + this.userService.teamToken).subscribe(
+          newToken => this.userService.refreshToken(newToken.toString()),
+          err => console.log(err),
+          () => { this.newTokenChange = false; this.init(); }
+        );
+      }
+
     } else {
       console.log('Not logged in - no Websocket');
     }

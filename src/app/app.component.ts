@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   public isLanding = true;
 
-  constructor(private userService: UserService, private websocketService: WebsocketService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
       this.router.events
@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
                   this.isLanding = (event.url === '/') || (event.url === '/login') || (event.url === '/registration');
               }
           });
-      this.websocketService.init();
   }
 
   logout() {
