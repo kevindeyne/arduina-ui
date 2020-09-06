@@ -1,5 +1,4 @@
 import { TestNode } from './../services/TestNode';
-import { StatusChangeModel } from './../services/StatusChangeModel';
 import { UserService } from './../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -35,7 +34,7 @@ export class TestcasesComponent implements OnInit {
     this.userService.getEvents().getNodeStatusChanges().subscribe(statusChange => {
       for (const node of this.nodes) {
         if (node.id === statusChange.id) {
-          node.lastState = statusChange.statusPrettyPrint;
+          node.lastState = statusChange.statusClass.toUpperCase();
           break;
         }
       }
@@ -66,7 +65,7 @@ export class TestcasesComponent implements OnInit {
     }
 
     this.httpClient.post<any>(environment.baseUrl + '/node/' + this.testcaseId + '/run', {}, this.userService.getHeader())
-      .subscribe(e => {});
+      .subscribe(() => {});
   }
 
   completeRun() { // has to be called from websocket?
