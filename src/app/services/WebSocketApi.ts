@@ -30,7 +30,9 @@ export class WebSocketAPI {
             self.stompClient.subscribe(self.topicNodeStatusChange + self.token, (e) => {
                 self.eventService.sendNodeStatusChange(new StatusChangeModel().copyTo(e.body));
             });
-            self.stompClient.subscribe(self.topicTestcaseStatusChange + self.token, (e) => { self.onMessageReceived(e.body); });
+            self.stompClient.subscribe(self.topicTestcaseStatusChange + self.token, (e) => {
+                self.eventService.sendTestcaseStatusChange(new StatusChangeModel().copyTo(e.body));
+            });
         }, this.errorCallBack);
     }
 

@@ -10,13 +10,18 @@ export class EventService {
   constructor() { }
 
   private nodeStatusChange = new Subject<StatusChangeModel>();
+  private testcaseStatusChange = new Subject<StatusChangeModel>();
+
+  sendTestcaseStatusChange(statusChange: StatusChangeModel) {
+    this.testcaseStatusChange.next(statusChange);
+}
+
+  getTestcaseStatusChanges(): Observable<StatusChangeModel> {
+      return this.testcaseStatusChange.asObservable();
+  }
 
   sendNodeStatusChange(statusChange: StatusChangeModel) {
       this.nodeStatusChange.next(statusChange);
-  }
-
-  clearNodeStatusChanges() {
-      this.nodeStatusChange.next();
   }
 
   getNodeStatusChanges(): Observable<StatusChangeModel> {

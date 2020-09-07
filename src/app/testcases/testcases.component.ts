@@ -39,6 +39,14 @@ export class TestcasesComponent implements OnInit {
         }
       }
     });
+
+    this.userService.getEvents().getTestcaseStatusChanges().subscribe(statusChange => {
+        if (parseInt(this.testcaseId, 10) === statusChange.id) {
+          const wasSuccess = statusChange.statusClass.toUpperCase() === 'SUCCESS';
+          this.lastRunStatus = statusChange.statusPrettyPrint;
+          this.completeRun(wasSuccess);
+        }
+    });
   }
 
   receiveStatusChange(e: any) {
@@ -68,9 +76,8 @@ export class TestcasesComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  completeRun() { // has to be called from websocket?
+  completeRun(wasSuccess) {
     this.isRunning = false;
-    this.lastRunStatus = 'Success';
     this.reconstructLastRun();
   }
 
