@@ -1,8 +1,13 @@
 <div class="outer">
-  <div class="inner" *ngFor="let node of nodes">
-    <input  type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="{{node.command}}"/>
-    <span class="info status">{{node.lastState}}</span>
-    <span class="info time"></span>
-  </div>
+  <ng-container *ngFor="let node of nodes">
+    <div class="inner">
+      <input  type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  value="{{node.command}}"/>
+      <span class="info status {{node.stateClass}}">{{node.lastState}}</span>
+      <span class="info time"></span>
+    </div>
+    <p *ngIf="node.error" class="error-info error">{{node.error}}</p>
+    <p *ngIf="node.warning" class="warning-info warning">{{node.warning}}</p>
+  </ng-container>
+
   <input type="text" autocomplete="off" (focus)="noFullSelect($event)" (keyup)="navigation($event)"  placeholder="# enter new command"/>
 </div>

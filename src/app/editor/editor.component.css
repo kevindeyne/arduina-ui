@@ -61,3 +61,9 @@ input[type="text"]:focus {
     color: #ff9ca1;
     text-decoration: underline;
 }
+.success {
+    color:#a0d2a4 !important;
+}
+.failed {
+    color:red !important;
+}

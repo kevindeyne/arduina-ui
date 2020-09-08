@@ -47,6 +47,7 @@ export class WebSocketAPI {
         console.log('errorCallBack -> ' + error);
         const self = this;
         setTimeout(() => {
+            self._disconnect();
             self._connect(self.token);
         }, 5000);
     }

@@ -27,6 +27,9 @@ export class TestcasesComponent implements OnInit {
     this.testcaseId = this.route.snapshot.params.id;
     this.httpClient.get<any>(environment.baseUrl + '/node/' + this.testcaseId, this.userService.getHeader()).subscribe(e => {
       if (Array.isArray(e)) {
+        for (const node of e) {
+          (node as TestNode).stateClass = (node as TestNode).lastState.toLowerCase();
+        }
         this.nodes = e;
       }
     });
@@ -34,19 +37,29 @@ export class TestcasesComponent implements OnInit {
     this.userService.getEvents().getNodeStatusChanges().subscribe(statusChange => {
       for (const node of this.nodes) {
         if (node.id === statusChange.id) {
-          node.lastState = statusChange.statusClass.toUpperCase();
+          node.lastState = statusChange.statusPrettyPrint.toUpperCase();
+          node.stateClass = statusChange.statusPrettyPrint.toLowerCase();
+          node.error = statusChange.error;
+          node.warning = statusChange.warning;
           break;
         }
       }
     });
 
     this.userService.getEvents().getTestcaseStatusChanges().subscribe(statusChange => {
-        if (parseInt(this.testcaseId, 10) === statusChange.id) {
-          const wasSuccess = statusChange.statusClass.toUpperCase() === 'SUCCESS';
+        if (this.isMatch(this.testcaseId, statusChange.id)) {
           this.lastRunStatus = statusChange.statusPrettyPrint;
-          this.completeRun(wasSuccess);
+          this.completeRun(this.isSuccess(statusChange.statusClass));
         }
     });
+  }
+
+  isMatch(testcase: string, compareId: number): boolean {
+    return parseInt(testcase, 10) === compareId;
+  }
+
+  isSuccess(status: string): boolean {
+    return status.toUpperCase() === 'SUCCESS';
   }
 
   receiveStatusChange(e: any) {
@@ -70,6 +83,8 @@ export class TestcasesComponent implements OnInit {
 
     for (const node of this.nodes) {
       node.lastState = '';
+      node.error = null;
+      node.warning = null;
     }
 
     this.httpClient.post<any>(environment.baseUrl + '/node/' + this.testcaseId + '/run', {}, this.userService.getHeader())
