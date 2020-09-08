@@ -37,7 +37,8 @@ export class TestcasesComponent implements OnInit {
     this.userService.getEvents().getNodeStatusChanges().subscribe(statusChange => {
       for (const node of this.nodes) {
         if (node.id === statusChange.id) {
-          node.lastState = statusChange.statusPrettyPrint.toUpperCase();
+          node.lastState = statusChange.statusClass;
+          node.lastStatePretty = statusChange.statusPrettyPrint;
           node.stateClass = statusChange.statusPrettyPrint.toLowerCase();
           node.error = statusChange.error;
           node.warning = statusChange.warning;
@@ -59,7 +60,7 @@ export class TestcasesComponent implements OnInit {
   }
 
   isSuccess(status: string): boolean {
-    return status.toUpperCase() === 'SUCCESS';
+    return status === 'SUCCESS';
   }
 
   receiveStatusChange(e: any) {
@@ -83,6 +84,7 @@ export class TestcasesComponent implements OnInit {
 
     for (const node of this.nodes) {
       node.lastState = '';
+      node.lastStatePretty = '';
       node.error = null;
       node.warning = null;
     }
