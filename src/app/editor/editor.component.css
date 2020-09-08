@@ -44,12 +44,16 @@ input[type="text"]:focus {
     border: 1px solid #a61d24;
     padding: 10px;
     margin-bottom: 10px !important;
+    font-size: 0.9em;
+    font-family: monospace;
 }
 .warning {
     color: orange;
     border: 1px solid orange;
     padding: 10px;
     margin-bottom: 10px !important;
+    font-size: 0.9em;
+    font-family: monospace;
 }
 .error p, .warning p {
     font-family: monospace;
