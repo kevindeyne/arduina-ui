@@ -72,6 +72,14 @@ export class UserService {
     this.teamToken = teamToken;
   }
 
+  refreshTeamToken(teamToken: string) {
+    this.setTeamToken(teamToken);
+    if(this.socket) {
+      this.socket._disconnect();
+      this.socket._connect(teamToken);
+    }
+  }
+
   private calculateExpiration(): number {
     return new Date().getTime() + 15 * 60 * 1000;
   }

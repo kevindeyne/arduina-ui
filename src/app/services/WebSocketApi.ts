@@ -26,7 +26,9 @@ export class WebSocketAPI {
         const self = this;
         self.token = teamToken;
         self.stompClient.connect({}, () => {
-            self.stompClient.subscribe(self.topicNewToken + self.token, (e) => { self.onMessageReceived(e.body); });
+            self.stompClient.subscribe(self.topicNewToken + self.token, (e) => {
+                self.eventService.sendToken(e.body);
+            });
             self.stompClient.subscribe(self.topicNodeStatusChange + self.token, (e) => {
                 self.eventService.sendNodeStatusChange(new StatusChangeModel().copyTo(e.body));
             });
@@ -37,7 +39,7 @@ export class WebSocketAPI {
     }
 
     _disconnect() {
-        if (this.stompClient !== null) {
+        if (this.stompClient !== null && this.stompClient !== undefined) {
             this.stompClient.disconnect();
         }
     }

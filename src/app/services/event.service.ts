@@ -11,6 +11,7 @@ export class EventService {
 
   private nodeStatusChange = new Subject<StatusChangeModel>();
   private testcaseStatusChange = new Subject<StatusChangeModel>();
+  private tokenChange = new Subject<string>();
 
   sendTestcaseStatusChange(statusChange: StatusChangeModel) {
     this.testcaseStatusChange.next(statusChange);
@@ -26,6 +27,14 @@ export class EventService {
 
   getNodeStatusChanges(): Observable<StatusChangeModel> {
       return this.nodeStatusChange.asObservable();
+  }
+
+  sendToken(statusChange: string) {
+    this.tokenChange.next(statusChange);
+  }
+
+  getTokenChange(): Observable<string> {
+      return this.tokenChange.asObservable();
   }
 
 }

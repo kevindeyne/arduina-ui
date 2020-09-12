@@ -1,4 +1,3 @@
-import { WebsocketService } from './services/websocket.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './services/user.service';
@@ -21,6 +20,10 @@ export class AppComponent implements OnInit {
                   this.isLanding = (event.url === '/') || (event.url === '/login') || (event.url === '/registration');
               }
           });
+
+      this.userService.getEvents().getTokenChange().subscribe(token => {
+        this.userService.refreshTeamToken(token);
+    });
   }
 
   logout() {

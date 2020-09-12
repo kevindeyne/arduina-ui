@@ -112,7 +112,6 @@ export class EditorDocsComponent implements OnInit {
   }
 
   showAllOptions() {
-        this.debug = 'Showing all options';
         this.allOptionsShown = true;
         this.multipleOptionsPossible = [];
   }
