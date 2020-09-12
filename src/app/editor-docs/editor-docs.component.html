@@ -1,13 +1,29 @@
-<div>
-  <h1><span class="category">UI / </span> CLICK</h1>
-  <p>{{debug}}</p>
-  <p class="code">CLICK '(documentselector)' -optionA -optionB</p>
-  <p class="example">Example: <span class="code">CLICK 'button[type="submit"]'</span></p>
-  <p>The CLICK command is meant to trigger a click event in a web ui. By default it will wait until a change is done</p>
-  <p>Possible options:<br>
-    <span class="code">-wait=(boolean)</span>
-    Default value: true<br>
-    This will check for a combination of DOM changes and visual comparisons.
+<div *ngIf="outOfFocus">
+  <h1>Testcase detail</h1>
+  <p>History</p>
+  <p>Failure details (screenshots?)</p>
+</div>
+<div *ngIf="!outOfFocus && (allOptionsShown || multipleOptionsPossible.length !== 0)">
+  <h1>Command Options</h1>
+  <div class="row" *ngFor="let category of categories">
+    <p>{{category.cat}}</p>
+    <ul [ngClass]="{'subdued': multipleOptionsPossible.length !== 0}">
+      <li *ngFor="let command of category.cmds" [ngClass]="{'possibleOption': multipleOptionsPossible.indexOf(command)>-1}">{{command}}</li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="!outOfFocus && !allOptionsShown && multipleOptionsPossible.length === 0">
+  <h1>Command: {{selected.name}}</h1>
+  <p class="link" (click)="showAllOptions()">> Show all options</p>
+  <p class="code">{{selected.fullCommand}}</p>
+  <p class="example">Example: <span class="code">{{selected.example}}</span></p>
+  <p>{{selected.description}}</p>
+  <p *ngIf="selected.options.length > 0">Possible options:<br>
+    <ng-container *ngFor="let option of selected.options">
+      <span class="code">{{option.option}} </span>
+      <span *ngIf="option.default">Default value: {{option.default}}</span><br>
+      {{option.description}}
+    </ng-container>
   </p>
 
 </div>

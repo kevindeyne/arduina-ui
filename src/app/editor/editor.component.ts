@@ -20,19 +20,25 @@ export class EditorComponent {
 
   navigation(event) {
     this.updateDocumentation(event);
-    if (event.key === 'ArrowDown' && null !== event.srcElement.nextElementSibling) {
-      if ('INPUT' === event.srcElement.nextElementSibling.nodeName) {
-          this.focusElement(event, event.srcElement.nextElementSibling);
-      } else {
-          this.focusElement(event, event.srcElement.nextElementSibling.nextElementSibling);
-      }
-    } else if (event.key === 'ArrowUp' && null !== event.srcElement.previousElementSibling) {
-        if ('INPUT' === event.srcElement.previousElementSibling.nodeName) {
-            this.focusElement(event, event.srcElement.previousElementSibling);
-        } else {
-            this.focusElement(event, event.srcElement.previousElementSibling.previousElementSibling);
-        }
+    if (event.key === 'ArrowDown') {
+        this.focusElement(event, this.getNextSibling(event.srcElement, '.input'));
+    } else if (event.key === 'ArrowUp') {
+         this.focusElement(event, this.getPreviousSibling(event.srcElement, '.input'));
      }
+  }
+
+  getPreviousSibling(elem, selector) {
+    const allOptions = document.querySelectorAll(selector);
+    const index = Array.prototype.indexOf.call(allOptions, elem);
+    if(index === 0) { return elem; }
+    return allOptions[index - 1];
+  }
+
+  getNextSibling(elem, selector) {
+    const allOptions = document.querySelectorAll(selector);
+    const index = Array.prototype.indexOf.call(allOptions, elem);
+    if(index === allOptions.length) { return elem; }
+    return allOptions[index + 1];
   }
 
   focusElement(event, element) {
