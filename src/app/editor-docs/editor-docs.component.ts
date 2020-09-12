@@ -14,7 +14,7 @@ export class EditorDocsComponent implements OnInit {
 
   private matches = ['OPEN', 'CLICK', 'INPUT', 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT', 'VERIFY', 'SCROLL'];
 
-  private categories = [
+  categories = [
     {
       cat: 'Web UI',
       cmds: ['OPEN', 'CLICK', 'INPUT', 'SCROLL']
@@ -37,7 +37,7 @@ export class EditorDocsComponent implements OnInit {
     }
   ];
 
-  private commandDetails = [
+  commandDetails = [
     {
       name: 'OPEN',
       fullCommand: 'OPEN \'(documentselector)\'',
