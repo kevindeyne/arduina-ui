@@ -9,4 +9,5 @@ export class TestNode {
     error: string;
     warning: string;
     testcaseId = 0;
+    lastVersion: string;
 }

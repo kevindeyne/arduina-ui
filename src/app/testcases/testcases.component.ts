@@ -18,6 +18,8 @@ export class TestcasesComponent implements OnInit {
   isRunning = false;
 
   nodes: TestNode[] = [];
+  projectName: string;
+  testcaseName: string;
 
   private testcaseId: string;
 
@@ -26,11 +28,16 @@ export class TestcasesComponent implements OnInit {
   ngOnInit(): void {
     this.testcaseId = this.route.snapshot.params.id;
     this.httpClient.get<any>(environment.baseUrl + '/node/' + this.testcaseId, this.userService.getHeader()).subscribe(e => {
-      if (Array.isArray(e)) {
-        for (const node of e) {
-          (node as TestNode).stateClass = (node as TestNode).lastState.toLowerCase();
+      this.projectName = e.projectName;
+      this.testcaseName = e.testcaseName;
+      if (Array.isArray(e.nodes)) {
+        for (const node of e.nodes) {
+          const testNode = (node as TestNode);
+          testNode.command = testNode.command.trim();
+          testNode.stateClass = testNode.lastState.toLowerCase();
+          testNode.lastVersion = testNode.command;
         }
-        this.nodes = e;
+        this.nodes = e.nodes;
       }
     });
 

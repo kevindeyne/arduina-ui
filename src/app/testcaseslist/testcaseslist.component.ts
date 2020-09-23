@@ -13,6 +13,8 @@ export class TestcaseslistComponent implements OnInit {
 
   private projectId: string;
   testcases = [];
+  hasLogin = false;
+  projectName: string;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService) { }
 
@@ -20,9 +22,9 @@ export class TestcaseslistComponent implements OnInit {
     this.projectId = this.route.snapshot.params.id;
 
     this.httpClient.get<any>(environment.baseUrl + '/projects/' + this.projectId, this.userService.getHeader()).subscribe(e => {
-      if (Array.isArray(e)) {
-        this.testcases = e;
-      }
+        this.testcases = e.testCases;
+        this.projectName = e.projectName;
+        this.hasLogin = e.hasLogin;
     });
   }
 
